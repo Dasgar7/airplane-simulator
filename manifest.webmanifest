@@ -1,0 +1,14 @@
+{
+  "name": "Airplane Simulator",
+  "short_name": "AirSim",
+  "description": "Fly a plane around the world, visit people, earn money.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "landscape",
+  "background_color": "#081228",
+  "theme_color": "#0e5aa0",
+  "icons": [
+    { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
