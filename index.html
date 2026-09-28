@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#0e5aa0" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>Airplane Simulator</title>
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/icon.svg" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <canvas id="c"></canvas>
+  <div class="hud">
+    <div class="topbar">
+      <div class="card">
+        <div class="brand">AIRPLANE SIMULATOR</div>
+        <div class="stats">
+          <span>Cash <b id="cash">$0</b></span>
+          <span>Alt <b id="alt">0</b> ft</span>
+          <span>Spd <b id="spd">0</b> kn</span>
+          <span>Jobs <b id="jobs">0</b></span>
+        </div>
+      </div>
+      <div class="card job" id="job">Take off and pick a contract.</div>
+      <button class="install" id="install">Install app</button>
+    </div>
+    <div class="toast" id="toast"></div>
+    <div class="controls">
+      <div class="stick-wrap" id="stick"><div class="knob" id="knob"></div></div>
+      <div class="help">WASD / arrows fly · Shift/Ctrl throttle · Space visit when close</div>
+      <div class="right-pad">
+        <button class="btn go" id="visit">VISIT</button>
+        <div class="thr" id="thr"><div class="thr-knob" id="thrKnob"></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="rotate">Turn your phone sideways to fly.</div>
+  <script type="importmap">
+  { "imports": { "three": "https://unpkg.com/three@0.170.0/build/three.module.js" } }
+  </script>
+  <script type="module" src="/game.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');
+    let deferred;
+    const btn = document.getElementById('install');
+    window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferred = e; btn.style.display = 'block'; });
+    btn.addEventListener('click', async () => { if (!deferred) return; deferred.prompt(); deferred = null; btn.style.display = 'none'; });
+  </script>
+</body>
+</html>
